@@ -1,0 +1,415 @@
+/* ==========================================================================
+   1. CORE BASE DESIGN RESET & VARIABLES
+   ========================================================================== */
+:root {
+    --primary: #2d5a27;
+    --primary-dark: #1b3b17;
+    --accent: #8fae87;
+    --dark: #1a2419;
+    --light: #f7faf6;
+    --white: #ffffff;
+    --text-muted: #666666;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Common Container Utility */
+.container, .about-container { 
+    max-width: 1200px; 
+    margin: auto !important; 
+    padding: 80px 20px 40px 20px !important; 
+}
+
+.section-title { 
+    text-align: center; 
+    font-size: 2.5rem; 
+    color: var(--primary-dark); 
+    margin-bottom: 15px !important; 
+    font-weight: 800; 
+}
+
+.section-subtitle { 
+    text-align: center; 
+    color: var(--text-muted); 
+    margin-bottom: 50px !important; 
+    font-size: 1.1rem; 
+}
+
+/* ==========================================================================
+   2. MODERN HEADER (PERFECT VERTICAL NAVIGATION CENTER ALIGNMENT)
+   ========================================================================== */
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    height: 80px; /* Rigid baseline height constraint */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+}
+
+.header-container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important; /* Forces dead-center horizontal matching */
+}
+
+.logo-link {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.header-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-menu-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 40px !important;
+}
+
+.nav-links {
+    display: flex !important;
+    list-style: none !important;
+    gap: 30px !important;
+    align-items: center !important;
+}
+
+.nav-item {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 5px 0 !important;
+    transition: var(--transition);
+}
+
+.nav-item:hover, .nav-item.active { 
+    color: var(--primary); 
+}
+
+/* Link Hover Sliding Underline */
+.nav-item::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 2px !important;
+    background: var(--primary) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+.nav-item:hover::after, .nav-item.active::after {
+    width: 100% !important;
+}
+
+.cta-button {
+    text-decoration: none;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px 22px !important;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(45, 90, 39, 0.2);
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: var(--transition);
+}
+
+.cta-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ==========================================================================
+   3. HERO SECTION WITH SINGLE-LINE HEADLINE PROTECTIONS
+   ========================================================================== */
+.hero {
+    min-height: 90vh;
+    position: relative;
+    background: linear-gradient(135deg, rgba(26, 36, 25, 0.88) 0%, rgba(45, 90, 39, 0.85) 100%), 
+                url('https://github.com/CDD202677/CDD_Website/raw/main/3%20(1).png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    padding: 140px 20px 80px 20px !important;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Forces entire headline onto a single horizontal row on standard viewports */
+@media (min-width: 901px) {
+    .hero-content h1 { 
+        font-size: 3.5rem !important; 
+        font-weight: 800 !important; 
+        color: var(--white) !important; 
+        margin-bottom: 20px !important; 
+        line-height: 1.2 !important;
+        white-space: nowrap !important; 
+        display: flex !important;       
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 10px !important;           
+    }
+    
+    .animated-text {
+        color: var(--accent) !important;
+        font-weight: 800 !important;
+        position: relative;
+        display: inline-block !important;
+        white-space: nowrap !important;
+        padding-right: 6px !important;
+    }
+}
+
+.hero-content p { 
+    font-size: 1.25rem; 
+    color: var(--white); 
+    opacity: 0.95;
+    margin-bottom: 35px !important; 
+    max-width: 800px;
+    margin: 0 auto 35px auto !important;
+}
+
+.cta-btn {
+    display: inline-block;
+    background: var(--white);
+    color: var(--primary-dark);
+    padding: 15px 35px !important;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   4. CAPABILITIES SLIDER CAROUSEL SECTION
+   ========================================================================== */
+.slider-section {
+    max-width: 1200px;
+    margin: 80px auto !important;
+    padding: 0 20px !important;
+}
+
+.slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.slider-track {
+    display: flex !important;
+    gap: 30px !important;
+}
+
+.slide-card {
+    flex: 0 0 calc(33.333% - 20px) !important; 
+    background: var(--white);
+    padding: 40px 30px !important;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    will-change: transform, box-shadow, border-color;
+}
+
+.card-icon {
+    font-size: 1.75rem;
+    margin-bottom: 20px !important;
+    display: inline-block !important;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 12px !important;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.slider-dots {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 35px !important;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #cbd5e0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active-dot {
+    background-color: var(--primary);
+    width: 24px;
+    border-radius: 5px;
+}
+
+/* ==========================================================================
+   5. ABOUT US, STATISTICS & CORE VALUE PILLARS (STRICT HORIZONTAL LINE LOCK)
+   ========================================================================== */
+.about-section { 
+    background-color: var(--white); 
+    padding: 0 0 60px 0 !important;
+}
+
+.about-text { 
+    text-align: center; 
+    max-width: 850px; 
+    margin: 20px auto 0 auto !important; 
+    font-size: 1.15rem; 
+    color: #444; 
+    line-height: 1.8; 
+}
+
+.features-section {
+    max-width: 1200px;
+    margin: 40px auto 0 auto !important;
+    padding: 0 20px !important;
+}
+
+/* Absolutely locks all 4 Value Items onto the same horizontal line on desktop */
+@media (min-width: 1025px) {
+    .features-grid { 
+        display: grid !important; 
+        grid-template-columns: repeat(4, 1fr) !important; 
+        gap: 20px !important; 
+    }
+    .feature-item {
+        padding: 30px 20px !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .features-grid { 
+        display: grid !important; 
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important; 
+        gap: 30px !important; 
+    }
+}
+
+.feature-item { 
+    background: var(--white); 
+    padding: 40px 30px !important; 
+    border-radius: 16px; 
+     border: 3px solid rgba(0,0,0,0.1);  
+}
+
+.feature-icon {
+    color: var(--dark);
+    margin-bottom: 20px !important;
+    display: inline-block !important;
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 15px !important;
+    letter-spacing: 0.5px;
+}
+
+.feature-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* Statistics Numerical Counters */
+.stats-container {
+    max-width: 1200px;
+    margin: 60px auto 20px auto !important;
+    padding: 0 20px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    gap: 30px !important;
+    text-align: center;
+}
+
+.stat-item {
+    background: var(--white);
+    padding: 30px 20px !important;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.1;
+    margin-bottom: 10px !important;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   6. CAREERS & FORMS INTAKES
+   ========================================================================== */
+.careers-section { background-color: var(--light); }.careers-grid { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; gap: 30px !important; margin-bottom: 50px !important; }.job-card {background: var(--white);padding: 30px !important;border-radius: 16px;border: 1px solid rgba(0,0,0,0.10);}.job-badge {background: rgba(45, 90, 39, 0.1);color: var(--primary);padding: 4px 12px !important;border-radius: 50px;font-size: 0.8rem;font-weight: 700;}.career-form-box {background: var(--white) !important;padding: 45px !important;border-radius: 24px;border: 2px solid #2d5a27 !important;max-width: 800px;margin: 40px auto 0 auto !important;}.form-group { margin-bottom: 20px !important; text-align: left; }.form-group label { display: block !important; margin-bottom: 8px !important; font-weight: 600; color: var(--dark); }input[type="text"], input[type="email"], textarea {width: 100% !important;padding: 14px !important;border: 2px solid #1a2419 !important;background: #ffffff !important;color: #000000 !important;border-radius: 8px !important;font-size: 1rem !important;}.file-input-style {display: block !important;width: 100%;padding: 15px !important;background: #ffffff !important;border: 2px dashed #2d5a27 !important;border-radius: 8px;}.submit-action-btn {width: 100%;background: var(--primary);color: var(--white);border: none;padding: 16px !important;border-radius: 8px;font-size: 1rem;font-weight: 700;cursor: pointer;margin-top: 15px !important;}/* ==========================================================================7. CONTACT SECTION SUBMIT INTEGERS========================================================================== */.contact-section {max-width: 1200px;margin: 80px auto !important;padding: 0 20px !important;}.contact-container {background: var(--white);border-radius: 16px;border: 1px solid rgba(0,0,0,0.05);display: grid !important;grid-template-columns: 1fr 1.2fr !important;overflow: hidden;box-shadow: 0 10px 30px rgba(0,0,0,0.02);}.info-sidebar {background: var(--primary-dark);color: var(--white);padding: 50px 40px !important;display: flex !important;flex-direction: column !important;justify-content: space-between !important;}.company-name { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px !important;}.company-tagline { font-size: 0.9rem; opacity: 0.8;}.contact-details-list { margin: 40px 0 !important; display: flex !important; flex-direction: column !important; gap: 30px !important;}.detail-block { display: flex !important; gap: 15px !important; align-items: flex-start !important;}.detail-icon { width: 24px; height: 24px; flex-shrink: 0; opacity: 0.8;}.detail-content h4 { font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 4px !important; opacity: 0.6;}.detail-content p, .detail-content a { font-size: 1rem; color: var(--white); text-decoration: none;}.sidebar-footer p { font-size: 0.8rem; opacity: 0.4;}.form-wrapper { padding: 50px 40px !important; background: var(--white);}.lead-form { display: flex !important; flex-direction: column !important; gap: 20px !important;}.form-submit-btn {align-self: flex-start;background: var(--primary);color: var(--white);border: none;padding: 14px 30px !important;font-size: 0.95rem;font-weight: 700;border-radius: 8px;cursor: pointer;display: inline-flex !important;align-items: center !important;gap: 10px !important;transition: var(--transition);}.btn-arrow { width: 16px; height: 16px; transition: transform 0.25s ease;}/* ==========================================================================8. PREMIUM CENTERED SITE FOOTER & HIGH-CONTRAST VECTOR ICONS========================================================================== */.site-footer {background-color: var(--dark);color: rgba(255, 255, 255, 0.7);padding: 60px 0 0 0 !important;border-top: 1px solid rgba(255, 255, 255, 0.05);}.footer-container {max-width: 1200px;margin: 0 auto !important;padding: 0 20px 40px 20px !important;display: grid !important;grid-template-columns: 1.2fr 0.8fr 1fr 1fr !important;gap: 40px !important;}.footer-column {display: flex !important;flex-direction: column !important;align-items: center !important;text-align: center;}/* Enforced exact 150px height requirement bounds */.footer-logo {height: 150px !important;width: auto !important;object-fit: contain;margin-bottom: 15px !important;}.footer-tagline { font-size: 0.85rem; line-height: 1.5; max-width: 250px;}.footer-title { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 20px !important;}.footer-links, .footer-contact-details { list-style: none; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 12px !important;}.footer-links a, .footer-contact-details a { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 0.85rem; transition: var(--transition);}.footer-contact-details li { display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; font-size: 0.85rem;}.social-desc { font-size: 0.85rem; margin-bottom: 15px !important; max-width: 220px;}.social-icons-row {display: flex !important;justify-content: center !important;align-items: center !important;gap: 15px !important;margin-top: 10px !important;}/* Forces absolute rendering contrast visibility for vector SVGs on dark footer grids */.social-icon-link {color: rgba(255, 255, 255, 0.7) !important;display: inline-flex !important;align-items: center !important;justify-content: center !important;width: 42px !important;height: 42px !important;border-radius: 50% !important;background-color: rgba(255, 255, 255, 0.08) !important;transition: var(--transition) !important;text-decoration: none;}.social-icon-link svg {width: 20px !important;height: 20px !important;display: block !important;fill: currentColor !important;}.footer-bottom-bar {background-color: rgba(0, 0, 0, 0.15);padding: 20px !important;border-top: 1px solid rgba(255, 255, 255, 0.03);}.bottom-container { max-width: 1200px; margin: 0 auto !important; text-align: center;}.bottom-container p { font-size: 0.8rem;}/* ==========================================================================9. INTERACTIVE 3D POP-UP HOVER ANIMATIONS========================================================================== */.slide-card, .feature-item, .job-card, .stat-item {transition: var(--transition) !important;cursor: pointer !important;}.slide-card:hover, .slide-card:active, .slide-card.active-card,.feature-item:hover, .feature-item:active, .job-card:hover, .stat-item:hover {transform: translateY(-10px) scale(1.02) !important;box-shadow: 0 15px 35px rgba(45, 90, 39, 0.15) !important;border-color: var(--primary) !important;}.submit-action-btn:hover, .form-submit-btn:hover {background-color: var(--primary-dark) !important;transform: translateY(-2px) !important;box-shadow: 0 5px 15px rgba(27, 59, 23, 0.3) !important;}.form-submit-btn:hover .btn-arrow { transform: translateX(4px) !important;}input:focus, textarea:focus { outline: none !important; border: 2px solid var(--primary) !important; box-shadow: 0 0 8px rgba(45, 90, 39, 0.2) !important;}.apply-btn { transition: all 0.2s ease !important; text-decoration: none; color: var(--primary); font-weight: 700; display: inline-block !important;}.apply-btn:hover { color: var(--primary-dark) !important; padding-left: 5px !important;}.footer-links a:hover, .footer-contact-details a:hover { color: var(--white) !important;}.social-icon-link.linkedin-btn:hover { background-color: #0077b5 !important; color: #ffffff !important; transform: translateY(-3px) !important; }.social-icon-link.instagram-btn:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important; color: #ffffff !important; transform: translateY(-3px) !important; }.social-icon-link.facebook-btn:hover { background-color: #1877f2 !important; color: #ffffff !important; transform: translateY(-3px) !important; }/* ==========================================================================10. MOBILE DEVICES BREAKPOINTS RESPONSIVENESS========================================================================== */@media (max-width: 900px) {.hero-content h1 { font-size: 2.3rem !important; white-space: normal !important; display: block !important;}.animated-text { display: inline !important; min-height: auto;}.mobile-menu-toggle { display: flex !important;}.nav-menu-wrapper {position: fixed;top: 0;right: -100%;width: 280px;height: 100vh;background-color: #ffffff;box-shadow: -4px 0 15px rgba(0, 0, 0, 0.05);flex-direction: column !important;justify-content: flex-start !important;align-items: flex-start !important;padding: 100px 40px 40px 40px !important;gap: 40px !important;transition: var(--transition);}.nav-menu-wrapper.mobile-open { right: 0; }.nav-links { flex-direction: column !important; width: 100%; gap: 20px !important; align-items: flex-start !important; }.nav-item { font-size: 1.1rem; display: block !important; width: 100%;}.mobile-menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg) !important; }.mobile-menu-toggle.open span:nth-child(2) { opacity: 0 !important; }.mobile-menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg) !important; }.contact-container { grid-template-columns: 1fr !important; }.slide-card { flex: 0 0 calc(50% - 15px) !important; }}@media (max-width: 640px) {.slide-card { flex: 0 0 100% !important; }.footer-container { grid-template-columns: 1fr !important; gap: 30px !important; }}
+
+
+
+
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.3);
+            background: var(--light);
+        }
